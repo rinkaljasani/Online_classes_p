@@ -40,4 +40,16 @@ class Controller extends BaseController
         );
         return $filters;
     }
+
+        // Store Error Log
+        public function storeErrorLog($error,$filename = 'laravel',$message = null)
+        {
+            if(empty($message)){ $message = trans('api.went_wrong'); }
+            $this->response['meta']['message'] = $message;
+
+            // Add error log
+            $iqTrackingLog = new Logger($filename);
+            $iqTrackingLog->pushHandler(new StreamHandler(storage_path('logs/' . $filename . '.log')), Logger::ERROR);
+            $iqTrackingLog->error($filename, ['error' => $error->getMessage()]);
+        }
 }
