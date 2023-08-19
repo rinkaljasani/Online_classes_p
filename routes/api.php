@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('get-project', [GeneralController::class,'getProject'])->name('general.get.project');
 Route::post('register', [AuthenticationController::class,'register'])->name('user.register');
+Route::post('get-plan', [GeneralController::class,'getPlan'])->name('general.get.plan');
