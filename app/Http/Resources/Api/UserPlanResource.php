@@ -20,7 +20,8 @@ class UserPlanResource extends JsonResource
             'purchase_at'   => $this->purchase_at,
             'expired_at'   => $this->expiry_at ?? "",
             'project'       => new ProjectResource($this->project),
-            'device' => new DeviceResource($this->device)
+            'device' => new DeviceResource($this->device),
+            'plan' => new PlanResource($this->plan)
         ];
     }
 }

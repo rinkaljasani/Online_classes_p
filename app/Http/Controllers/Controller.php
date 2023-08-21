@@ -12,9 +12,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     //add for api
-    protected $response = array('data' => null, 'message' => '');
+    protected $response = array('data' => null,);
     protected $status = 422;
     protected $statusArr = [
+        'created' => 200,
         'success' => 200,
         'not_found' => 404,
         'unauthorised' => 412,
@@ -51,5 +52,14 @@ class Controller extends BaseController
             $iqTrackingLog = new Logger($filename);
             $iqTrackingLog->pushHandler(new StreamHandler(storage_path('logs/' . $filename . '.log')), Logger::ERROR);
             $iqTrackingLog->error($filename, ['error' => $error->getMessage()]);
+        }
+
+        public function returnResponse($c_status = null)
+        {
+            if($c_status != null){
+                $this->status = $c_status;
+            }
+            $this->response['meta']['url'] = url()->current();
+            return response()->json($this->response, $this->status);
         }
 }

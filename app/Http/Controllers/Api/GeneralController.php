@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\FaqResource;
 use App\Http\Resources\Api\PlanResource;
 use App\Http\Resources\Api\ProjectResource;
 use App\Models\Faqs;
@@ -18,12 +19,12 @@ class GeneralController extends Controller
         if ($projects) {
             return ProjectResource::collection($projects)->additional([
                 'meta' => [
-                    'total_transaction' => $projects->count(),
+                    'total_projects' => $projects->count(),
                     'message' =>    trans('api.list', ['entity' => __('Project')]),
                     'url'       =>  url()->current(),
                 ]
             ]);
-        } else { $this->response['meta']['message']  = trans('api.registered_fail'); }
+        } else { $this->response['meta']['message']  = trans('api.not_found'); }
     }
 
     public function getPlan(Request $request){
@@ -35,11 +36,11 @@ class GeneralController extends Controller
             return PlanResource::collection($plans)->additional([
                 'meta' => [
                     'total_plan' => $plans->count(),
-                    'message' =>    trans('api.list', ['entity' => __('Project')]),
+                    'message' =>    trans('api.list', ['entity' => __('Plan')]),
                     'url'       =>  url()->current(),
                 ]
             ]);
-        } else { $this->response['meta']['message']  = trans('api.registered_fail'); }
+        } else { $this->response['meta']['message']  = trans('api.not_found'); }
     }
 
     public function getFaq(Request $request){
@@ -48,14 +49,14 @@ class GeneralController extends Controller
         $project_id = Project::whereCustomId($request->project_id)->first()->id;
         $faqs = Faqs::where('project_id',$project_id)->get();
         if ($faqs) {
-            return ProjectResource::collection($faqs)->additional([
+            return FaqResource::collection($faqs)->additional([
                 'meta' => [
-                    'total_plan' => $faqs->count(),
-                    'message' =>    trans('api.list', ['entity' => __('Project')]),
+                    'total_faqs' => $faqs->count(),
+                    'message' =>    trans('api.list', ['entity' => __('FAQs')]),
                     'url'       =>  url()->current(),
                 ]
             ]);
-        } else { $this->response['meta']['message']  = trans('api.registered_fail'); }
+        } else { $this->response['meta']['message']  = trans('api.not_found'); }
     }
 
 

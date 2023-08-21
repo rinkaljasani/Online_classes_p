@@ -29,8 +29,8 @@ class PlanController extends Controller
                 ]
             ]);
 
-        } else { $this->response['meta']['message']  = trans('api.registered_fail'); }
-
+        } else { $this->response['meta']['message']  = trans('api.not_found'); }
+        return $this->returnResponse();
     }
 
     public function addUserPlan(Request $request){

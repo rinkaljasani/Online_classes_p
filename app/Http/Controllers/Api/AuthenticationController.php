@@ -44,9 +44,9 @@ class AuthenticationController extends Controller
                     ->additional([
                         'meta' => [
                             'message'       =>  trans('api.registered'),
-                        'auth_token'=>$user->createToken(config('utility.auth_token'))->plainTextToken,
+                            'auth_token'=>$user->createToken(config('utility.auth_token'))->plainTextToken,
                         ]
-                    ]);
+                    ])->response()->setStatusCode(200);
             } else { $this->response['meta']['message']  = trans('api.registered_fail'); }
         } catch (\Exception $e) {dd($e); $this->storeErrorLog($e, 'register'); }
         return $this->returnResponse(200);
