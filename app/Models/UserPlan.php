@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserPlan extends Model
 {
     protected $fillable = [
-        'user_id' ,'plan_id','project_id','purchase_at','user_device_id','custom_id','is_active'
+        'user_id' ,'plan_id','project_id','purchase_at','user_device_id','custom_id','is_active','expiry_at'
     ];
 
     public function user(){

@@ -16,10 +16,10 @@ class UserPlanResource extends JsonResource
     {
         return [
             'id'            =>  $this->custom_id,
-            'project'       =>  [
-                'id' => $this->project->custom_id,
-                'name' => $this->project->name,
-            ],
+            'is_active' => $this->is_active,
+            'purchase_at'   => $this->purchase_at,
+            'expired_at'   => $this->expiry_at ?? "",
+            'project'       => new ProjectResource($this->project),
             'device' => new DeviceResource($this->device)
         ];
     }

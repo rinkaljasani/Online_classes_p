@@ -35,8 +35,17 @@ class PlanController extends Controller
 
     public function addUserPlan(Request $request){
         $user_id = Auth::id();
+
+        $extra_plan_months = 0;
         $plan = Plan::whereCustomId($request->plan_id)->with('project')->first();
         $device = UserDevice::whereCustomId($request->device_id)->first();
+        $isPlanExists = UserPlan::where('user_device_id',$device->id)->where('plan_id',$plan->id)->first();
+
+        if($isPlanExists && Carbon::now()->lt($isPlanExists->expiry_at)){
+            $extra_plan_months = Carbon::now()->diffInMonths($isPlanExists->expiry_at);
+        }
+
+        $expiry_at = Carbon::parse(now())->addMonths(($plan->months ?? 0) + ($plan->special_offer_months ?? 0) + ($extra_plan_months))->format('Y-m-d H:i:s');
         $userplan = UserPlan::updateOrCreate([
             'user_device_id' => $device->id,
             'plan_id' => $plan->id,
@@ -45,7 +54,8 @@ class PlanController extends Controller
             'custom_id' => getUniqueString('user_plans'),
             'project_id' => $plan->project->id,
             'purchase_at' => Carbon::now(),
-            'is_active' => 'y'
+            'is_active' => 'y',
+            'expiry_at' => $expiry_at
         ]);
         if ($userplan) {
             return (new UserPlanResource($userplan))->additional([

@@ -16,6 +16,7 @@ class AddDeviceIdUserPlan extends Migration
         Schema::table('user_plans', function (Blueprint $table) {
             $table->unsignedBigInteger('user_device_id')->nullable();
             $table->foreign('user_device_id')->references('id')->on('user_devices')->onDelete('cascade')->onUpdate('cascade');
+            $table->dateTime('expiry_at')->nullable();
         });
     }
 
@@ -28,7 +29,7 @@ class AddDeviceIdUserPlan extends Migration
     {
         Schema::table('user_plans', function (Blueprint $table) {
             $table->dropForeign('user_plans_user_device_id_foreign'); // $table->dropForeign('table_name_consultant_id_foreign');
-            $table->dropColumn('user_device_id');
+            $table->dropColumn(['user_device_id','expiry_at']);
         });
     }
 }
