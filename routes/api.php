@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\GeneralController;
+use App\Http\Controllers\Api\PlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('get-project', [GeneralController::class,'getProject'])->name('general.get.project');
 Route::post('register', [AuthenticationController::class,'register'])->name('user.register');
 Route::post('get-plan', [GeneralController::class,'getPlan'])->name('general.get.plan');
+Route::post('get-faqs', [GeneralController::class,'getFaq'])->name('general.get.faq');
+Route::group(['middleware'	=>	['auth:api'] ], function() {
+    Route::post('add-user-plan', [PlanController::class,'addUserPlan'])->name('plan.add.userActivePlan');
+    Route::post('get-user-active-plan', [PlanController::class,'getUserActivePlan'])->name('plan.get');
+});

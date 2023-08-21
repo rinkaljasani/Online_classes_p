@@ -2,14 +2,16 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UserDevice;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use HasApiTokens,Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -44,7 +46,9 @@ class User extends Authenticatable
     ];
     // relationships
 
-    protected function project(){
-        return $this->belongsTo('project', 'project_id');
+    public function project(){
+        return $this->belongsTo(Project::class);
     }
+    public function devices(){  return $this->hasMany(UserDevice::class);   }
+    public function device(){  return $this->hasOne(UserDevice::class)->where('is_active','y')->latest();   }
 }

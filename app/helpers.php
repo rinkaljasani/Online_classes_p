@@ -40,6 +40,9 @@ function getPermissions($user_type = 'normal')
             11 =>[ // faqs
                 'permissions' => 'access,add,edit,delete'
             ],
+            12 =>[ // user_plans
+                'permissions' => 'access,add,edit,delete'
+            ],
         ];
     }
 

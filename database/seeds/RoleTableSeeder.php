@@ -182,6 +182,21 @@ class RoleTableSeeder extends Seeder
                     'created_at'                => \Carbon\Carbon::now(),
                     'updated_at'                => \Carbon\Carbon::now(),
                 ],
+                [
+                    'section_id'                => 12,
+                    'title'                     => 'User Plans',
+                    'route'                     => 'admin.user_plans.index',
+                    'params'                    => '',
+                    'icon'                      =>  'icon-settings',
+                    'image'                     => '',
+                    'icon_type'                 =>  'font-awesome',
+                    'sequence'                  => 1,
+                    'is_display'                =>  'y',
+                    'is_active'                 =>  'y',
+                    'allowed_permissions'       => 'access,add,edit,delete',
+                    'created_at'                => \Carbon\Carbon::now(),
+                    'updated_at'                => \Carbon\Carbon::now(),
+                ],
         ];
         Role::insert($roles);
         //updated permissions of admin for new added section and role

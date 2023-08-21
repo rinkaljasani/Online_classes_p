@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectResource extends JsonResource
+class DeviceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,11 @@ class ProjectResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'            =>  $this->custom_id,
-            'name'          => $this->name
+            'id' => $this->custom_id,
+            'device_id' => $this->device_id,
+            'device_type' => $this->device_type,
+            'is_active' => $this->is_active,
         ];
-        return parent::toArray($request);
+
     }
 }

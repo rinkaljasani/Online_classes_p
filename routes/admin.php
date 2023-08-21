@@ -60,9 +60,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['check_permit','revalidat
 	Route::get('plans/listing', 'PlansController@listing')->name('plans.listing');
 	Route::resource('plans', 'PlansController');
 
+    /* User Plans  */
+	Route::get('user_plans/listing', 'UserPlanController@listing')->name('user_plans.listing');
+	Route::resource('user_plans', 'UserPlanController');
+
     /* PLan */
 	Route::get('faqs/listing', 'FaqsController@listing')->name('faqs.listing');
 	Route::resource('faqs', 'FAQsController');
+
 
 });
 

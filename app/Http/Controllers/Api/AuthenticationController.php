@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\Api\UserProfileResource;
 use App\Models\Project;
+use App\Models\UserDevice;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +25,17 @@ class AuthenticationController extends Controller
                 'email' => $request['email'],
                 'project_id' => $project->id,
             ],[
+                'custom_id' => $request['custom_id'],
                 'first_name' => $request['first_name'],
                 'last_name' => $request['last_name'],
                 'contact_no' => $request['contact_no'],
-                'custom_id' => $request['custom_id'],
+            ]);
+
+            $user_device = UserDevice::updateOrCreate([
+                'user_id' => $user->id,
+                'device_id' => $request['device_id'],
+            ],[
+                'custom_id' => getUniqueString('user_devices')
             ]);
 
             if ($user) {
@@ -36,6 +44,7 @@ class AuthenticationController extends Controller
                     ->additional([
                         'meta' => [
                             'message'       =>  trans('api.registered'),
+                        'auth_token'=>$user->createToken(config('utility.auth_token'))->plainTextToken,
                         ]
                     ]);
             } else { $this->response['meta']['message']  = trans('api.registered_fail'); }

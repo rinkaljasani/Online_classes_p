@@ -126,6 +126,16 @@ class SectionsTableSeeder extends Seeder
                     'created_at'    => \Carbon\Carbon::now(),
                     'updated_at'    => \Carbon\Carbon::now(),
                 ],
+                [
+                    'name'          => 'User Plan Management',
+                    'icon'          =>  'icon-users',
+                    'image'         =>  '',
+                    'icon_type'     =>  'font-awesome',
+                    'sequence'      => 12,
+                    'is_active'     => 'y',
+                    'created_at'    => \Carbon\Carbon::now(),
+                    'updated_at'    => \Carbon\Carbon::now(),
+                ],
         ];
         Section::insert($sections);
     }
