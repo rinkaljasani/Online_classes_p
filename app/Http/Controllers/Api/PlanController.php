@@ -23,14 +23,19 @@ class PlanController extends Controller
         if ($userplan) {
 
             return (new UserPlanResource($userplan))->additional([
+
                 'meta' => [
+					'status' => '1',
                     'message' =>    trans('api.list', ['entity' => __('Project')]),
                     'url'       =>  url()->current(),
                 ]
             ]);
 
-        } else { $this->response['meta']['message']  = trans('api.not_found'); }
-        return $this->returnResponse();
+        } else {
+			$this->response['meta']['message']  = trans('api.not_found',['entity' => 'User active plan']);
+			$this->response['meta']['status']  = '0';
+		}
+        return $this->returnResponse(200);
     }
 
     public function addUserPlan(Request $request){

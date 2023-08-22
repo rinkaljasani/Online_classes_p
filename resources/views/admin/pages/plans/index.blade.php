@@ -70,7 +70,7 @@
             ajax: {
                 url: "{{ route('admin.plans.listing') }}",
                 data: {
-                    columnsDef: ['checkbox','name','project' ,'months', 'special_offer_months', 'active', 'action'],
+                    columnsDef: ['checkbox','name','project' ,'months', 'special_offer_months','price', 'active', 'action'],
                     project_id: project_id,
                 },
             },
@@ -80,6 +80,7 @@
                 { data: 'project' },
                 { data: 'months' },
                 { data: 'special_offer_months' },
+                { data: 'price' },
                 { data: 'active' },
                 { data: 'action', responsivePriority: -1 },
             ],
@@ -90,6 +91,7 @@
                 { targets: 2, title: 'Project', orderable: true },
                 { targets: 3, title: 'Month', orderable: true },
                 { targets: 4, title: 'Special Offer Month', orderable: true },
+                { targets: 5, title: 'Price', orderable: true },
                 { targets: 5, title: 'Active', orderable: true },
 
                 // Action buttons

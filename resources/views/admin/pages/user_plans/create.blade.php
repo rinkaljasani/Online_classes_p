@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-    {!! Breadcrumbs::render('users_create') !!}
+    {!! Breadcrumbs::render('user_plans_create') !!}
 @endpush
 
 @section('content')
@@ -17,77 +17,17 @@
         </div>
 
         <!--begin::Form-->
-        <form id="frmAddPlan" method="POST" action="{{ route('admin.plans.store') }}" enctype="multipart/form-data">
+        <form id="frmAddUserPlan" method="POST" action="{{ route('admin.user_plans.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-                {{-- First Name --}}
-                <div class="form-group">
-                    <label for="name">{!!$mend_sign!!}Name:</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Enter name" autocomplete="name" spellcheck="false" autocapitalize="sentences" tabindex="0" autofocus />
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                            <strong class="form-text">{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
-                </div>
 
-                {{-- Description --}}
-                <div class="form-group">
-                    <label for="description">{!!$mend_sign!!}Plan description:</label>
-                    <textarea type="text" class="form-control" placeholder="Enter plan description" name="description" id="description" required></textarea>
-                    @if ($errors->has('description'))
-                        <span class="help-block">
-                            <strong class="form-text">{{ $errors->first('description') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-
-                {{-- Month --}}
-                <div class="form-group">
-                    <label for="months">Months</label>
-                    <input type="text" class="form-control @error('months') is-invalid @enderror" id="months" name="months" value="{{ old('months') }}" placeholder="Enter monthss" autocomplete="months" spellcheck="false" tabindex="0" />
-                    @if ($errors->has('months'))
-                        <span class="text-danger">
-                            <strong class="form-text">{{ $errors->first('months') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-
-                {{-- Month --}}
-                <div class="form-group">
-                    <label for="special_offer_months">Special Offer Months</label>
-                    <input type="text" class="form-control @error('special_offer_months') is-invalid @enderror" id="special_offer_months" name="special_offer_months" value="{{ old('special_offer_months') }}" placeholder="Enter special offer months" autocomplete="special_offer_months" spellcheck="false" tabindex="0" />
-                    @if ($errors->has('special_offer_months'))
-                        <span class="text-danger">
-                            <strong class="form-text">{{ $errors->first('special_offer_months') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                {{-- Active now --}}
-                <div class="form-group">
-                    <label for="is_active">Active now?{!!$mend_sign!!}</label>
-                   <select id="is_active" class="form-control" name="is_active">
-
-                        <option value="y"> Yes</option>
-                        <option value="n"> No</option>
-                    </select>
-                    @if ($errors->has('is_active'))
-                        <span class="help-block">
-                            <strong class="form-text">{{ $errors->first('is_active') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                {{-- Project --}}
+                {{-- Project Id --}}
                 <div class="form-group">
                     <label for="project_id">Select Project{!!$mend_sign!!}</label>
-                   <select id="project_id" class="form-control" name="project_id">
+                   <select id="project_id" class="form-control" name="project_id" data-error-container="#project_id_error_container">
                         <option></option>
                         @foreach($projects as $project)
-                            <option value={{$project->custom_id}}> {{ $project->name }}</option>
+                            <option value={{$project->id}} > {{ $project->name }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('project_id'))
@@ -95,8 +35,61 @@
                             <strong class="form-text">{{ $errors->first('project_id') }}</strong>
                         </span>
                     @endif
+                    <span id="project_id_error_container"></span>
                 </div>
+                {{-- User Id --}}
+                <div class="form-group">
+                    <label for="user_id">Select User{!!$mend_sign!!}</label>
+                   <select id="user_id" class="form-control" name="user_id" data-error-container="#user_id_error_container">
+                    <option>Select Project First</option>
 
+                    </select>
+                    @if ($errors->has('user_id'))
+                        <span class="help-block">
+                            <strong class="form-text">{{ $errors->first('user_id') }}</strong>
+                        </span>
+                    @endif
+                    <span id="user_id_error_container"></span>
+                </div>
+                {{-- Plan Id --}}
+                <div class="form-group">
+                    <label for="plan_id">Select Plan{!!$mend_sign!!}</label>
+                   <select id="plan_id" class="form-control" name="plan_id" data-error-container="#plan_id_error_container">
+                        <option>Select Project First</option>
+
+                    </select>
+                    @if ($errors->has('plan_id'))
+                        <span class="help-block">
+                            <strong class="form-text">{{ $errors->first('plan_id') }}</strong>
+                        </span>
+                    @endif
+                    <span id="plan_id_error_container"></span>
+                </div>
+                {{-- Device ID --}}
+                <div class="form-group">
+                    <label for="device_id">Device Id{!!$mend_sign!!}</label>
+                   <input type="text" name="device_id" placeholder="Enter Device Id" id="device_id" class="form-control">
+                   {{-- <select id="device_id" class="form-control" name="device_id" data-error-container="#device_id_error_container">
+                    <option>Select User First</option>
+
+                </select> --}}
+                    @if ($errors->has('device_id'))
+                        <span class="help-block">
+                            <strong class="form-text">{{ $errors->first('device_id') }}</strong>
+                        </span>
+                    @endif
+                    <span id="device_id_error_container"></span>
+                </div>
+                {{-- Device Type --}}
+                <div class="form-group">
+                    <label for="device_type">Device Type{!!$mend_sign!!}</label>
+                   <input type="text" name="device_type" placeholder="Enter Device Type" id="device_type" class="form-control">
+                    @if ($errors->has('device_type'))
+                        <span class="help-block">
+                            <strong class="form-text">{{ $errors->first('device_type') }}</strong>
+                        </span>
+                    @endif
+                </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2 text-uppercase"> Add {{ $custom_title }}</button>
@@ -111,65 +104,114 @@
 @push('extra-js-scripts')
 <script>
 $(document).ready(function () {
-    $("#frmAddPlan").validate({
+    $('#project_id').select2({
+        placeholder:"Select Project"
+    });
+    $('#user_id').select2({
+        placeholder:"Select Users"
+    });
+    $('#plan_id').select2({
+        placeholder:"Select Plan"
+    });
+    // $('#device_id').select2({
+    //     placeholder:"Select Device Id"
+    // });
+
+    $('#project_id').change(function(){
+        console.log('Project');
+        var project_id = $(this).val();
+        $.ajax({
+            url: "{{route('admin.get_projects.users_plans')}}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                _token: "{{csrf_token()}}",
+                project_id
+            },
+            success:function(response){
+
+                var usersOptions = plansOptions = '<option></option>';
+
+                if( response.users.length > 0){
+
+                    response.users.map(function(user){
+                        usersOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`;
+                    });
+                    // $('#user_id').select2('refresh');
+                }
+                if(response.plans.length > 0){
+                    response.plans.map(function(plan){
+                        plansOptions += `<option value="${plan.id}">${plan.name}</option>`;
+                    });
+                    // $('#plan_id').select2('refresh');
+                }
+                $('#plan_id').html(plansOptions);
+                $('#user_id').html(usersOptions);
+
+
+                console.log(response);
+            },
+        });
+    });
+    $('#user_id').change(function(){
+
+        var user_id = $(this).val();
+        $.ajax({
+            url: "{{route('admin.get_active_users_devices')}}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                _token: "{{csrf_token()}}",
+                user_id
+            },
+            success:function(response){
+                console.log(response.device);
+                if(response.device !== null){
+                    $('#device_id').val(response.device.device_id);
+                    $('#device_type').val(response.device.device_type);
+                }
+            },
+        });
+    });
+
+    $("#frmAddUserPlan").validate({
         rules: {
-            name: {
-                required: true,
-                not_empty: true,
-                minlength: 3,
-            },
-            description: {
-                required: true,
-                not_empty: true,
-                minlength: 3,
-            },
-            months: {
-                required: true,
-                digits: true,
-
-            },
-            special_offer_months: {
-                required: true,
-                digits: true,
-
-            },
-            is_active :{
+            user_id: {
                 required: true,
             },
             project_id: {
                 required: true,
+            },
+            plan_id: {
+                required: true,
+            },
+            device_id: {
+                required: true,
+                not_empty:true,
+            },
+            device_type: {
+                required: true,
+                not_empty:true,
             }
-            // image:{
-            //     extension: "jpg|jpeg|png",
-            // },
         },
         messages: {
-            name: {
-                required: "@lang('validation.required',['attribute'=>'Name'])",
-                not_empty: "@lang('validation.not_empty',['attribute'=>'Name'])",
-                minlength:"@lang('validation.min.string',['attribute'=>'Name','min'=>3])",
+            user_id: {
+                required: "@lang('validation.required',['attribute'=>'User'])",
             },
-            description: {
-                required: "@lang('validation.required',['attribute'=>'Description'])",
-                not_empty: "@lang('validation.not_empty',['attribute'=>'Description'])",
-                minlength:"@lang('validation.min.string',['attribute'=>'Description','min'=>3])",
-            },
-            months: {
-                required: "@lang('validation.required',['attribute'=>'months'])",
-                digits: "@lang('validation.digits',['attribute'=>'months'])",
-                minlength:"@lang('validation.min.string',['attribute'=>'months','min'=>3])",
-            },
-            special_offer_months: {
-                required: "@lang('validation.required',['attribute'=>'special offer months'])",
-                digits: "@lang('validation.digits',['attribute'=>'special offer months'])",
-                minlength:"@lang('validation.min.string',['attribute'=>'special offer months','min'=>3])",
-            },
-            is_active: {
-                required: "@lang('validation.required',['attribute'=>'Active now'])",
+            plan_id: {
+                required: "@lang('validation.required',['attribute'=>'Plan'])",
             },
             project_id: {
                 required: "@lang('validation.required',['attribute'=>'Project'])",
-            }
+            },
+            device_id: {
+                required: "@lang('validation.required',['attribute'=>'Device Id'])",
+                not_empty: "@lang('validation.not_empty',['attribute'=>'Device Id'])",
+            },
+            device_type: {
+                required: "@lang('validation.required',['attribute'=>'Device Type'])",
+                not_empty: "@lang('validation.not_empty',['attribute'=>'Device Id'])",
+            },
         },
         errorClass: 'invalid-feedback',
         errorElement: 'span',

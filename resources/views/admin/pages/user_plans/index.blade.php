@@ -69,7 +69,7 @@
             ajax: {
                 url: "{{ route('admin.user_plans.listing') }}",
                 data: {
-                    columnsDef: ['checkbox','user_id','plan_id' ,'project_name', 'active', 'action'],
+                    columnsDef: ['checkbox','user_id','plan_id' ,'project_name', 'device_id','device_type','active', 'action'],
                 },
             },
             columns: [
@@ -77,6 +77,8 @@
                 { data: 'user_id' },
                 { data: 'plan_id' },
                 { data: 'project_id' },
+                { data: 'device_id' },
+                { data: 'device_type' },
                 { data: 'active' },
                 { data: 'action', responsivePriority: -1 },
             ],
@@ -86,7 +88,9 @@
                 { targets: 1, title: 'User Name', orderable: false },
                 { targets: 2, title: 'Plan Name', orderable: false },
                 { targets: 3, title: 'Project Name', orderable: false },
-                { targets: 4, title: 'Active', orderable: true },
+                { targets: 4, title: 'Device Id', orderable: false },
+                { targets: 5, title: 'Device Name', orderable: false },
+                { targets: 6, title: 'Active', orderable: true },
 
                 // Action buttons
                 { targets: -1, title: 'Action', orderable: false },

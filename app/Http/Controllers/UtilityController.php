@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Admin;
 use App\Models\CmsPage;
+use App\Models\Project;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -134,5 +135,20 @@ class UtilityController extends Controller
         }else{
             return "false";
         }
+    }
+    public function getProjectsUsersAndPlan(Request $request) {
+        // dd($request->all());
+        $project = Project::where('id',$request->project_id)->with('users','plans')->first();
+        return [
+            'plans' => $project->plans ?? [],
+            'users' => $project->users ?? [],
+        ];
+    }
+    public function getActiveUserDevices(Request $request) {
+        // dd($request->all());
+        $user = User::where('id',$request->user_id)->with('device')->first();
+        return [
+            'device' => $user->device ?? [],
+        ];
     }
 }

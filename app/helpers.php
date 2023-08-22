@@ -16,31 +16,22 @@ function getPermissions($user_type = 'normal')
             3 =>[ //Role Management
                 'permissions' => 'access,add,edit,delete'
             ],
-            4 =>[ //Country
-                'permissions' => 'access,add,edit,delete'
-            ],
-            5 =>[ //State
-                'permissions' => 'access,add,edit,delete'
-            ],
-            6 =>[ //City
-                'permissions' => 'access,add,edit,delete'
-            ],
-            7 =>[ //CMS Pages
+            4 =>[ //CMS Pages
                 'permissions' => 'access,edit'
             ],
-            8 =>[ //Site Configurations
+            5 =>[ //Site Configurations
                 'permissions' => 'access'
             ],
-            9 =>[ //Project
+            6 =>[ //Project
                 'permissions' => 'access,edit'
             ],
-            10 =>[ //Plan
+            7 =>[ //Plan
                 'permissions' => 'access,add,edit,delete'
             ],
-            11 =>[ // faqs
+            8 =>[ // faqs
                 'permissions' => 'access,add,edit,delete'
             ],
-            12 =>[ // user_plans
+            9 =>[ // user_plans
                 'permissions' => 'access,add,edit,delete'
             ],
         ];

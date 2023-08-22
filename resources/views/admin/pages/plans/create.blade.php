@@ -42,6 +42,16 @@
                     @endif
                 </div>
 
+                {{-- Price --}}
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" placeholder="Enter prices" autocomplete="price" spellcheck="false" tabindex="0" />
+                    @if ($errors->has('price'))
+                        <span class="text-danger">
+                            <strong class="form-text">{{ $errors->first('price') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
                 {{-- Month --}}
                 <div class="form-group">
@@ -128,6 +138,10 @@ $(document).ready(function () {
                 digits: true,
 
             },
+            price: {
+                required: true,
+                digits: true,
+            },
             special_offer_months: {
                 required: true,
                 digits: true,
@@ -153,6 +167,11 @@ $(document).ready(function () {
                 required: "@lang('validation.required',['attribute'=>'Description'])",
                 not_empty: "@lang('validation.not_empty',['attribute'=>'Description'])",
                 minlength:"@lang('validation.min.string',['attribute'=>'Description','min'=>3])",
+            },
+            price: {
+                required: "@lang('validation.required',['attribute'=>'price'])",
+                digits: "@lang('validation.digits',['attribute'=>'price'])",
+                minlength:"@lang('validation.min.string',['attribute'=>'price','min'=>3])",
             },
             months: {
                 required: "@lang('validation.required',['attribute'=>'months'])",

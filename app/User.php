@@ -50,5 +50,6 @@ class User extends Authenticatable
         return $this->belongsTo(Project::class);
     }
     public function devices(){  return $this->hasMany(UserDevice::class);   }
+    public function active_devices(){  return $this->hasMany(UserDevice::class)->where('is_active','y');   }
     public function device(){  return $this->hasOne(UserDevice::class)->where('is_active','y')->latest();   }
 }

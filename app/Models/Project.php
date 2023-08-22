@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -11,6 +12,9 @@ class Project extends Model
         'name','custom_id'
     ];
     public function users(){
-        return $this->hasMany('App\Models\User');
+        return $this->hasMany(User::class,'project_id','id');
+    }
+    public function plans(){
+        return $this->hasMany(Plan::class,'project_id','id');
     }
 }

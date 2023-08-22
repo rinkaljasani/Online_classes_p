@@ -11,6 +11,11 @@ class UserPlan extends Model
         'user_id' ,'plan_id','project_id','purchase_at','user_device_id','custom_id','is_active','expiry_at'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'custom_id';
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }

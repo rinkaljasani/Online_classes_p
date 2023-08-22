@@ -47,6 +47,17 @@
 
                 {{-- Months --}}
                 <div class="form-group">
+                    <label for="price">{!!$mend_sign!!}Price:</label>
+                    <input type="price" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') != null ? old('price') : $plan->price }}" placeholder="Enter price" autocomplete="price" spellcheck="false" tabindex="0" />
+                    @if ($errors->has('price'))
+                        <span class="text-danger">
+                            <strong class="form-text">{{ $errors->first('price') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                {{-- Months --}}
+                <div class="form-group">
                     <label for="months">{!!$mend_sign!!}Months:</label>
                     <input type="months" class="form-control @error('months') is-invalid @enderror" id="months" name="months" value="{{ old('months') != null ? old('months') : $plan->months }}" placeholder="Enter months" autocomplete="months" spellcheck="false" tabindex="0" />
                     @if ($errors->has('months'))
@@ -85,61 +96,69 @@
 $(document).ready(function () {
     $("#frmEditUser").validate({
         rules: {
-            first_name: {
+            name: {
                 required: true,
                 not_empty: true,
                 minlength: 3,
             },
-            last_name: {
+            description: {
                 required: true,
                 not_empty: true,
                 minlength: 3,
             },
-            email: {
+            months: {
                 required: true,
-                maxlength: 80,
-                email: true,
-                valid_email: true,
+                digits: true,
 
             },
-            contact_no: {
-                required: false,
-                not_empty: true,
-                maxlength: 16,
-                minlength: 6,
-                pattern: /^(\d+)(?: ?\d+)*$/,
+            price: {
+                required: true,
+                digits: true,
             },
-            profile_photo:{
-                extension: "jpg|jpeg|png",
+            special_offer_months: {
+                required: true,
+                digits: true,
+
             },
+            is_active :{
+                required: true,
+            },
+            project_id: {
+                required: true,
+            }
         },
         messages: {
-            first_name: {
-                required: "@lang('validation.required',['attribute'=>'first name'])",
-                not_empty: "@lang('validation.not_empty',['attribute'=>'first name'])",
-                minlength:"@lang('validation.min.string',['attribute'=>'first name','min'=>3])",
+            name: {
+                required: "@lang('validation.required',['attribute'=>'Name'])",
+                not_empty: "@lang('validation.not_empty',['attribute'=>'Name'])",
+                minlength:"@lang('validation.min.string',['attribute'=>'Name','min'=>3])",
             },
-            last_name: {
-                required: "@lang('validation.required',['attribute'=>'last name'])",
-                not_empty: "@lang('validation.not_empty',['attribute'=>'last name'])",
-                minlength:"@lang('validation.min.string',['attribute'=>'last name','min'=>3])",
+            description: {
+                required: "@lang('validation.required',['attribute'=>'Description'])",
+                not_empty: "@lang('validation.not_empty',['attribute'=>'Description'])",
+                minlength:"@lang('validation.min.string',['attribute'=>'Description','min'=>3])",
             },
-            email: {
-                required: "@lang('validation.required',['attribute'=>'email address'])",
-                maxlength:"@lang('validation.max.string',['attribute'=>'email address','max'=>80])",
-                email:"@lang('validation.email',['attribute'=>'email address'])",
-                valid_email:"@lang('validation.email',['attribute'=>'email address'])",
+            months: {
+                required: "@lang('validation.required',['attribute'=>'months'])",
+                digits: "@lang('validation.digits',['attribute'=>'months'])",
+                minlength:"@lang('validation.min.string',['attribute'=>'months','min'=>3])",
             },
-            contact_no: {
-                required:"@lang('validation.required',['attribute'=>'contact number'])",
-                not_empty:"@lang('validation.not_empty',['attribute'=>'contact number'])",
-                maxlength:"@lang('validation.max.string',['attribute'=>'contact number','max'=>16])",
-                minlength:"@lang('validation.min.string',['attribute'=>'contact number','min'=>6])",
-                pattern:"@lang('validation.numeric',['attribute'=>'contact number'])",
+            price: {
+                required: "@lang('validation.required',['attribute'=>'price'])",
+                digits: "@lang('validation.digits',['attribute'=>'price'])",
+                minlength:"@lang('validation.min.string',['attribute'=>'price','min'=>3])",
             },
-            profile_photo: {
-                extension:"@lang('validation.mimetypes',['attribute'=>'profile photo','value'=>'jpg|png|jpeg'])",
+            special_offer_months: {
+                required: "@lang('validation.required',['attribute'=>'special offer months'])",
+                digits: "@lang('validation.digits',['attribute'=>'special offer months'])",
+                minlength:"@lang('validation.min.string',['attribute'=>'special offer months','min'=>3])",
             },
+            is_active: {
+                required: "@lang('validation.required',['attribute'=>'Active now'])",
+            },
+            project_id: {
+                required: "@lang('validation.required',['attribute'=>'Project'])",
+            }
         },
         errorClass: 'invalid-feedback',
         errorElement: 'span',

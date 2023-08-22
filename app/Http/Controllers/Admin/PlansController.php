@@ -193,6 +193,7 @@ class PlansController extends Controller
                 'name' => $plan->name ?? "",
                 'project' => $plan->project ? $plan->project->name : '',
                 'months' => $plan->months ?? "",
+                'price' => $plan->price ?? "",
                 'special_offer_months' => $plan->special_offer_months ?? "",
                 'active' => view('admin.layouts.includes.switch', compact('params'))->render(),
                 'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Plan', 'id' => $plan->custom_id], $plan)->render(),

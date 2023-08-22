@@ -85,3 +85,6 @@ Route::post('summernote-media-image','Admin\SummernoteController@mediaDelete')->
 
 Route::post('check-title', 'UtilityController@checkTitle')->name('check.title');
 Route::post('profile/check-password', 'UtilityController@profilecheckpassword')->name('profile.check-password');
+
+Route::post('/get-users-plans', 'UtilityController@getProjectsUsersAndPlan')->name('get_projects.users_plans');
+Route::post('/get-active-users-devices', 'UtilityController@getActiveUserDevices')->name('get_active_users_devices');

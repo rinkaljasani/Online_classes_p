@@ -33,7 +33,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.users.create')->with(['custom_title' => 'User']);
+        $projects = Project::get();
+        return view('admin.pages.users.create',compact('projects'))->with(['custom_title' => 'User']);
     }
 
     /**
@@ -220,6 +221,8 @@ class UsersController extends Controller
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
                 'email' => '<a href="mailto:' . $user->email . '" >' . $user->email . '</a>',
+                'device_id' => $user->device->device_id ?? '',
+                'device_type' => $user->device->device_type ?? '',
                 'contact_no' => $user->contact_no ? '<a href="tel:' . $user->contact_no . '" >' . $user->contact_no . '</a>' : 'N/A',
                 'active' => view('admin.layouts.includes.switch', compact('params'))->render(),
                 'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'User', 'id' => $user->custom_id], $user)->render(),
