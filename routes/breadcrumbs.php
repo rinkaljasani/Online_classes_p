@@ -11,7 +11,7 @@ Breadcrumbs::register('dashboard', function ($breadcrumbs) {
 // Users -------------------------------------------------------------------------------------------------------------------------------------------------------
 Breadcrumbs::register('users_list', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Users', route(Auth::getDefaultDriver() . '.users.index'));
+    $breadcrumbs->push('Registered Users', route(Auth::getDefaultDriver() . '.users.index'));
 });
 
 // Quick Links
@@ -27,12 +27,12 @@ Breadcrumbs::register('my_profile', function ($breadcrumbs) {
 
 Breadcrumbs::register('users_create', function ($breadcrumbs) {
     $breadcrumbs->parent('users_list');
-    $breadcrumbs->push('Add New User', route(Auth::getDefaultDriver() . '.users.create'));
+    $breadcrumbs->push('Add New Registered User', route(Auth::getDefaultDriver() . '.users.create'));
 });
 
 Breadcrumbs::register('users_update', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('users_list');
-    $breadcrumbs->push('Edit User', route(Auth::getDefaultDriver() . '.users.edit', $id));
+    $breadcrumbs->push('Edit Registered User', route(Auth::getDefaultDriver() . '.users.edit', $id));
 });
 
 // Role Management -------------------------------------------------------------------------------------------------------------------------------------------------------
