@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,Notifiable, SoftDeletes;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,7 @@ class User extends Authenticatable
     }
 
     protected $fillable = [
-        'custom_id', 'social_id','first_name', 'last_name', 'email', 'contact_no', 'profile_photo', 'password', 'device_id','device_type','project_id',
+        'custom_id', 'social_id', 'first_name', 'last_name', 'email', 'contact_no', 'profile_photo', 'password', 'device_id', 'device_type', 'project_id',
     ];
 
     /**
@@ -46,10 +46,25 @@ class User extends Authenticatable
     ];
     // relationships
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(Project::class);
     }
-    public function devices(){  return $this->hasMany(UserDevice::class);   }
-    public function active_devices(){  return $this->hasMany(UserDevice::class)->where('is_active','y');   }
-    public function device(){  return $this->hasOne(UserDevice::class)->where('is_active','y')->latest();   }
+    public function devices()
+    {
+        return $this->hasMany(UserDevice::class);
+    }
+    public function active_devices()
+    {
+        return $this->hasMany(UserDevice::class)->where('is_active', 'y');
+    }
+    public function device()
+    {
+        return $this->hasOne(UserDevice::class)->where('is_active', 'y')->latest();
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }
