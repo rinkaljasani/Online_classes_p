@@ -36,13 +36,27 @@ class AuthenticationController extends Controller
             ]);
             UserDevice::where('user_id',$user->id)->update(['is_active'=>'n']);
 
-            $user_device = UserDevice::updateOrCreate([
-                'user_id' => $user->id,
-                'device_id' => $request['device_id'],
-            ],[
-                'custom_id' => getUniqueString('user_devices'),
-                'is_active' => 'y'
-            ]);
+            $user_device =UserDevice::where(['user_id' => $user->id,'device_id' => $request->device_id])->first();
+            if($user_device){
+
+                $user_device->is_active = 'y';
+                $user_device->save();
+            }else{
+
+                $new_user_device = UserDevice::create([
+                    'custom_id' =>getUniqueString('user_devices'),
+                    'user_id' => $user->id,
+                    'device_id' => $request['device_id'],
+                    'is_active' => 'y'
+                ]);
+            }
+            // $user_device = UserDevice::updateOrCreate([
+            //     'user_id' => $user->id,
+            //     'device_id' => $request['device_id'],
+            // ],[
+            //     'custom_id' => getUniqueString('user_devices'),
+            //     'is_active' => 'y'
+            // ]);
 
             if ($user) {
                 Auth::login($user);

@@ -23,12 +23,24 @@ class UserPlanRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'user_id' => 'required|exists:users,id',
-            'plan_id' => 'required|exists:plans,id',
-            'project_id' => 'required|exists:projects,id',
-            'device_id' => 'required|string',
-            'device_type' => 'required|string'
-        ];
+        $unless = "change_status";
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'user_id' => 'required_unless:action,'.$unless.'|exists:users,id',
+                    'plan_id' => 'required_unless:action,'.$unless.'|exists:plans,id',
+                    'project_id' => 'required_unless:action,'.$unless.'|exists:projects,id',
+                    'device_id' => 'required_unless:action,'.$unless.'|string',
+                    'device_type' => 'required_unless:action,'.$unless.'|string'
+                ];
+            case 'PUT':
+                return [
+                    'device_id' => 'required_unless:action,'.$unless.'|string',
+                    'device_type' => 'required_unless:action,'.$unless.'|string'
+                ];
+            default:
+
+                break;
+        }
     }
 }

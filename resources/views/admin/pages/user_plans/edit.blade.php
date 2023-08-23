@@ -25,7 +25,7 @@
                 {{-- Project Id --}}
                 <div class="form-group">
                     <label for="project_id">Select Project{!!$mend_sign!!}</label>
-                   <select id="project_id" class="form-control" name="project_id" data-error-container="#project_id_error_container">
+                   <select disabled id="project_id" class="form-control" name="project_id" data-error-container="#project_id_error_container">
                         <option></option>
                         @foreach($projects as $project)
                             <option value={{$project->id}} {{ $user_plan->project_id == $project->id ? 'selected' : '' }}> {{ $project->name }}</option>
@@ -41,7 +41,7 @@
                 {{-- User Id --}}
                 <div class="form-group">
                     <label for="user_id">Select User{!!$mend_sign!!}</label>
-                   <select id="user_id" class="form-control" name="user_id" data-error-container="#user_id_error_container">
+                   <select id="user_id" disabled class="form-control" name="user_id" data-error-container="#user_id_error_container">
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}" {{ $user->id == $user_plan->user_id ? 'selected' : '' }} >{{ $user->first_name }} {{ $user->last_name }} </option>
                         @endforeach
@@ -56,7 +56,7 @@
                 {{-- Plan Id --}}
                 <div class="form-group">
                     <label for="plan_id">Select Plan{!!$mend_sign!!}</label>
-                   <select id="plan_id" class="form-control" name="plan_id" data-error-container="#plan_id_error_container">
+                   <select id="plan_id" disabled class="form-control" name="plan_id" data-error-container="#plan_id_error_container">
                         @foreach ($plans as $plan)
                             <option  value="{{$plan->id}}"  {{ $user_plan->plan_id == $plan->id ? 'selected' : '' }}>{{$plan->name}}</option>
                         @endforeach
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mr-2 text-uppercase"> Add {{ $custom_title }}</button>
+                <button type="submit" class="btn btn-primary mr-2 text-uppercase"> Update {{ $custom_title }}</button>
                 <a href="{{ route('admin.plans.index') }}" class="btn btn-secondary text-uppercase">Cancel</a>
             </div>
         </form>
@@ -177,15 +177,15 @@ $(document).ready(function () {
 
     $("#frmEditUserPlan").validate({
         rules: {
-            user_id: {
-                required: true,
-            },
-            project_id: {
-                required: true,
-            },
-            plan_id: {
-                required: true,
-            },
+            // user_id: {
+            //     required: true,
+            // },
+            // project_id: {
+            //     required: true,
+            // },
+            // plan_id: {
+            //     required: true,
+            // },
             device_id: {
                 required: true,
                 not_empty:true,
@@ -196,15 +196,15 @@ $(document).ready(function () {
             }
         },
         messages: {
-            user_id: {
-                required: "@lang('validation.required',['attribute'=>'User'])",
-            },
-            plan_id: {
-                required: "@lang('validation.required',['attribute'=>'Plan'])",
-            },
-            project_id: {
-                required: "@lang('validation.required',['attribute'=>'Project'])",
-            },
+            // user_id: {
+            //     required: "@lang('validation.required',['attribute'=>'User'])",
+            // },
+            // plan_id: {
+            //     required: "@lang('validation.required',['attribute'=>'Plan'])",
+            // },
+            // project_id: {
+            //     required: "@lang('validation.required',['attribute'=>'Project'])",
+            // },
             device_id: {
                 required: "@lang('validation.required',['attribute'=>'Device Id'])",
                 not_empty: "@lang('validation.not_empty',['attribute'=>'Device Id'])",
