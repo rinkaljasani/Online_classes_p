@@ -239,7 +239,7 @@ class UserPlanController extends Controller
 
             $records['data'][] = [
                 'id' => $user_plan->id ?? '',
-                'user_id' =>  $user_plan->user ? $user_plan->user->email : '' ,
+                'user_id' =>  ($user_plan->user ? $user_plan->user->first_name : '') .' ('.($user_plan->user ? $user_plan->user->email : '') .')',
                 'plan_id' => $user_plan->plan ? $user_plan->plan->name : 'N/A',
                 'project_id' => $user_plan->project ? $user_plan->project->name : 'N/A',
                 'device_id' => $user_plan->device ? $user_plan->device->device_id : 'N/A',
