@@ -23,7 +23,7 @@ class UsersController extends Controller
     public function index()
     {
         $projects = Project::get();
-        return view('admin.pages.users.index',compact('projects'))->with(['custom_title' => 'Users']);
+        return view('admin.pages.users.index',compact('projects'))->with(['custom_title' => 'Registered Users']);
     }
 
     /**
@@ -34,7 +34,7 @@ class UsersController extends Controller
     public function create()
     {
         $projects = Project::get();
-        return view('admin.pages.users.create',compact('projects'))->with(['custom_title' => 'User']);
+        return view('admin.pages.users.create',compact('projects'))->with(['custom_title' => 'Registered User']);
     }
 
     /**
@@ -81,7 +81,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.pages.users.edit', compact('user'))->with(['custom_title' => 'Users']);
+        return view('admin.pages.users.edit', compact('user'))->with(['custom_title' => 'Registered Users']);
     }
 
     /**
