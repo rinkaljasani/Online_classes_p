@@ -65,7 +65,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['check_permit','revalidat
 	Route::resource('user_plans', 'UserPlanController');
 
     /* PLan */
-	Route::get('faqs/listing', 'FaqsController@listing')->name('faqs.listing');
+	Route::get('faqs/listing', 'FAQsController@listing')->name('faqs.listing');
 	Route::resource('faqs', 'FAQsController');
 
 
