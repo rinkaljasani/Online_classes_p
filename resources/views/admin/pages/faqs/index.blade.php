@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-    {!! Breadcrumbs::render('users_list') !!}
+    {!! Breadcrumbs::render('faqs_list') !!}
 @endpush
 
 @push('extra-css-styles')

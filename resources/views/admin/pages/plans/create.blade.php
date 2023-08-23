@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-    {!! Breadcrumbs::render('users_create') !!}
+    {!! Breadcrumbs::render('plans_create') !!}
 @endpush
 
 @section('content')

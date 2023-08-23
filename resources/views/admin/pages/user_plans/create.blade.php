@@ -82,8 +82,8 @@
                 </div>
                 {{-- Device Type --}}
                 <div class="form-group">
-                    <label for="device_type">Device Type{!!$mend_sign!!}</label>
-                   <input type="text" name="device_type" placeholder="Enter Device Type" id="device_type" class="form-control">
+                    <label for="device_type">Device Name{!!$mend_sign!!}</label>
+                   <input type="text" name="device_type" placeholder="Enter Device Name" id="device_type" class="form-control">
                     @if ($errors->has('device_type'))
                         <span class="help-block">
                             <strong class="form-text">{{ $errors->first('device_type') }}</strong>

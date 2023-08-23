@@ -64,19 +64,6 @@
                     @endif
                 </div>
 
-                {{-- Profile Photo --}}
-                <div class="form-group">
-                    <label for="profile_photo">Profile Photo</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="profile_photo" name="profile_photo" tabindex="0" />
-                        <label class="custom-file-label @error('profile_photo') is-invalid @enderror" for="customFile">Choose file</label>
-                        @if ($errors->has('profile_photo'))
-                            <span class="text-danger">
-                                <strong class="form-text">{{ $errors->first('profile_photo') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
 
                 {{-- Project --}}
                 <div class="form-group">
@@ -152,9 +139,6 @@ $(document).ready(function () {
                     }
                 },
             },
-            profile_photo:{
-                extension: "jpg|jpeg|png",
-            },
         },
         messages: {
             first_name: {
@@ -181,9 +165,6 @@ $(document).ready(function () {
                 minlength:"@lang('validation.min.string',['attribute'=>'contact number','min'=>6])",
                 pattern:"@lang('validation.numeric',['attribute'=>'contact number'])",
                 remote:"@lang('validation.unique',['attribute'=>'contact number'])",
-            },
-            profile_photo: {
-                extension:"@lang('validation.mimetypes',['attribute'=>'profile photo','value'=>'jpg|png|jpeg'])",
             },
         },
         errorClass: 'invalid-feedback',

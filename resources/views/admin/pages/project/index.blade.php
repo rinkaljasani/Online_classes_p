@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @push('breadcrumb')
-{!! Breadcrumbs::render('cms_list') !!}
+{!! Breadcrumbs::render('projects_list') !!}
 @endpush
 
 @push('extra-css-styles')

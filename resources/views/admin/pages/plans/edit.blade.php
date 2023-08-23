@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-    {!! Breadcrumbs::render('users_update', $plan->id) !!}
+    {!! Breadcrumbs::render('plans_update', $plan->id) !!}
 @endpush
 
 @section('content')

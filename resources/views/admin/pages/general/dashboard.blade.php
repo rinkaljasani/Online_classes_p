@@ -252,28 +252,6 @@
 
   </div>
   <!--end::second raw-->
-  <!--begin::third row-->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card card-custom gutter-b">
-        <div class="card-header flex-wrap border-0 py-5">
-          <div class="card-title">
-            <h3 class="card-label">User Exceptions</h3>
-          </div>
-
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" id="error_DT">
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--end::third raw-->
 
 </div>
 @endsection

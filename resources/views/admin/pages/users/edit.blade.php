@@ -66,29 +66,6 @@
                     @endif
                 </div>
 
-                {{-- Profile Photo --}}
-                <div class="form-group">
-                    <label for="profile_photo">Profile Photo</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="profile_photo" name="profile_photo" tabindex="0" />
-                        <label class="custom-file-label @error('profile_photo') is-invalid @enderror" for="customFile">Choose file</label>
-                        @if ($errors->has('profile_photo'))
-                        <span class="text-danger">
-                            <strong class="form-text">{{ $errors->first('profile_photo') }}</strong>
-                        </span>
-                    @endif
-                    </div>
-                </div>
-                @if ($user->profile_photo)
-                <div class="symbol symbol-120 mr-5">
-                        <div class="symbol-label" style="background-image:url({{ asset('storage/'.$user->profile_photo)}})">
-                        {{-- Custom css added .symbol div a --}}
-                            <a href="#" class="btn btn-icon btn-light btn-hover-danger remove-img" id="kt_quick_user_close" style="width: 18px; height: 18px;">
-                                <i class="ki ki-close icon-xs text-muted"></i>
-                            </a>
-                        </div>
-                 </div>
-                 @endif
 
 
             </div>
@@ -131,9 +108,6 @@ $(document).ready(function () {
                 minlength: 6,
                 pattern: /^(\d+)(?: ?\d+)*$/,
             },
-            profile_photo:{
-                extension: "jpg|jpeg|png",
-            },
         },
         messages: {
             first_name: {
@@ -158,9 +132,6 @@ $(document).ready(function () {
                 maxlength:"@lang('validation.max.string',['attribute'=>'contact number','max'=>16])",
                 minlength:"@lang('validation.min.string',['attribute'=>'contact number','min'=>6])",
                 pattern:"@lang('validation.numeric',['attribute'=>'contact number'])",
-            },
-            profile_photo: {
-                extension:"@lang('validation.mimetypes',['attribute'=>'profile photo','value'=>'jpg|png|jpeg'])",
             },
         },
         errorClass: 'invalid-feedback',

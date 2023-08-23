@@ -24,14 +24,14 @@ class UserPlanController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.user_plans.index')->with('custom_title','User Plan');
+        return view('admin.pages.user_plans.index')->with('custom_title','Subscribed Users');
     }
 
     public function create()
     {
         $projects = Project::get();
         $users = User::with('project')->get();
-        return view('admin.pages.user_plans.create',compact('projects','users'))->with(['custom_title' => 'User plan']);
+        return view('admin.pages.user_plans.create',compact('projects','users'))->with(['custom_title' => 'Subscribed User']);
     }
 
     /**
@@ -55,9 +55,9 @@ class UserPlanController extends Controller
         $user_plan = UserPlan::create($request->all());
 
         if( $user_plan ) {
-            flash('User account created successfully!')->success();
+            flash('Subscribed Users created successfully!')->success();
         } else {
-            flash('Unable to save avatar. Please try again later.')->error();
+            flash('Unable to add plan. Please try again later.')->error();
         }
         return redirect(route('admin.user_plans.index'));
     }
@@ -86,7 +86,7 @@ class UserPlanController extends Controller
         $projects = Project::get();
         $plans = Plan::where('project_id',$user_plan->project_id)->get();
         $user_devices = UserDevice::where('user_id',$user_plan->user_id)->get();
-        return view('admin.pages.user_plans.edit', compact('user_plan','users','projects','plans','user_devices'))->with(['custom_title' => 'User Plan']);
+        return view('admin.pages.user_plans.edit', compact('user_plan','users','projects','plans','user_devices'))->with(['custom_title' => 'Subscribed User']);
     }
 
     /**
@@ -124,7 +124,7 @@ class UserPlanController extends Controller
 
                 if( $user_plan->save() ) {
                     DB::commit();
-                    flash('User details updated successfully!')->success();
+                    flash('Subscribed user plan updated successfully!')->success();
                 } else {
                     flash('Unable to update user. Try again later')->error();
                 }
@@ -167,10 +167,10 @@ class UserPlanController extends Controller
         }
         $user->delete();
         if(request()->ajax()){
-        $content = array('status'=>200, 'message'=>"User deleted successfully.", 'count' => User::all()->count());
+        $content = array('status'=>200, 'message'=>"Subscribed user plan deleted successfully.", 'count' => User::all()->count());
         return response()->json($content);
         }else{
-        flash('User deleted successfully.')->success();
+        flash('Subscribed user plan deleted successfully.')->success();
         return redirect()->route('admin.users.index');
         }
         }

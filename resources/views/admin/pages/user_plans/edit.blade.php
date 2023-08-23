@@ -87,7 +87,7 @@
                 </div>
                 {{-- Device Type --}}
                 <div class="form-group">
-                    <label for="device_type">Device Type{!!$mend_sign!!}</label>
+                    <label for="device_type">Device Name{!!$mend_sign!!}</label>
                    <input type="text" name="device_type" placeholder="Enter Device Type" id="device_type" class="form-control" value="{{ $user_plan->device->device_type }}">
                     @if ($errors->has('device_type'))
                         <span class="help-block">

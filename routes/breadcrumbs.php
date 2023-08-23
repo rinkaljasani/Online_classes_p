@@ -49,51 +49,6 @@ Breadcrumbs::register('roles_update', function ($breadcrumbs, $id) {
     $breadcrumbs->push(__('Edit Role'), route('admin.roles.edit', $id));
 });
 
-// countries -------------------------------------------------------------------------------------------------------------------------------------------------------
-Breadcrumbs::register('countries_list', function ($breadcrumbs) {
-    $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Countries', route(Auth::getDefaultDriver() . '.countries.index'));
-});
-Breadcrumbs::register('countries_create', function ($breadcrumbs) {
-    $breadcrumbs->parent('countries_list');
-    $breadcrumbs->push('Add New Country', route(Auth::getDefaultDriver() . '.countries.create'));
-});
-
-Breadcrumbs::register('countries_update', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('countries_list');
-    $breadcrumbs->push('Edit Country', route(Auth::getDefaultDriver() . '.countries.edit', $id));
-});
-
-// states -------------------------------------------------------------------------------------------------------------------------------------------------------
-Breadcrumbs::register('states_list', function ($breadcrumbs) {
-    $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('States', route(Auth::getDefaultDriver() . '.states.index'));
-});
-Breadcrumbs::register('states_create', function ($breadcrumbs) {
-    $breadcrumbs->parent('states_list');
-    $breadcrumbs->push('Add New State', route(Auth::getDefaultDriver() . '.states.create'));
-});
-
-Breadcrumbs::register('states_update', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('states_list');
-    $breadcrumbs->push('Edit State', route(Auth::getDefaultDriver() . '.states.edit', $id));
-});
-
-// cities -------------------------------------------------------------------------------------------------------------------------------------------------------
-Breadcrumbs::register('cities_list', function ($breadcrumbs) {
-    $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('Cities', route(Auth::getDefaultDriver() . '.cities.index'));
-});
-Breadcrumbs::register('cities_create', function ($breadcrumbs) {
-    $breadcrumbs->parent('cities_list');
-    $breadcrumbs->push('Add New City', route(Auth::getDefaultDriver() . '.cities.create'));
-});
-
-Breadcrumbs::register('cities_update', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('cities_list');
-    $breadcrumbs->push('Edit City', route(Auth::getDefaultDriver() . '.cities.edit', $id));
-});
-
 // CMS Pages ---------------------------------------------------------------------------------------------------------------------------------------------------
 Breadcrumbs::register('cms_list', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
@@ -112,14 +67,56 @@ Breadcrumbs::register('site_setting', function ($breadcrumbs) {
 // User Plans -------------------------------------------------------------------------------------------------------------------------------------------------------
 Breadcrumbs::register('user_plans_list', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push('User Plans', route(Auth::getDefaultDriver() . '.user_plans.index'));
+    $breadcrumbs->push('Subscribed Users', route(Auth::getDefaultDriver() . '.user_plans.index'));
 });
 Breadcrumbs::register('user_plans_create', function ($breadcrumbs) {
     $breadcrumbs->parent('user_plans_list');
-    $breadcrumbs->push('Add New User Plan', route(Auth::getDefaultDriver() . '.user_plans.create'));
+    $breadcrumbs->push('Add New Subscribed Users', route(Auth::getDefaultDriver() . '.user_plans.create'));
 });
 
 Breadcrumbs::register('user_plans_update', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('user_plans_list');
-    $breadcrumbs->push('Edit User Plan', route(Auth::getDefaultDriver() . '.user_plans.edit', $id));
+    $breadcrumbs->push('Edit Subscribed Users', route(Auth::getDefaultDriver() . '.user_plans.edit', $id));
+});
+
+// project
+Breadcrumbs::register('projects_list', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push('Project', route(Auth::getDefaultDriver() . '.projects.index'));
+});
+
+Breadcrumbs::register('projects_update', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('projects_list');
+    $breadcrumbs->push('Edit Project', route(Auth::getDefaultDriver() . '.projects.edit', $id));
+});
+
+// Plans -------------------------------------------------------------------------------------------------------------------------------------------------------
+Breadcrumbs::register('plans_list', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push('Plans', route(Auth::getDefaultDriver() . '.plans.index'));
+});
+Breadcrumbs::register('plans_create', function ($breadcrumbs) {
+    $breadcrumbs->parent('plans_list');
+    $breadcrumbs->push('Add New Plan', route(Auth::getDefaultDriver() . '.plans.create'));
+});
+
+Breadcrumbs::register('plans_update', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('plans_list');
+    $breadcrumbs->push('Edit Plan', route(Auth::getDefaultDriver() . '.plans.edit', $id));
+});
+
+
+//  ---------Faqs----------------------------------------------------------------------------------------------------------------------------------------------
+Breadcrumbs::register('faqs_list', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push('Faqs', route(Auth::getDefaultDriver() . '.faqs.index'));
+});
+Breadcrumbs::register('faqs_create', function ($breadcrumbs) {
+    $breadcrumbs->parent('faqs_list');
+    $breadcrumbs->push('Add New Faqs', route(Auth::getDefaultDriver() . '.faqs.create'));
+});
+
+Breadcrumbs::register('faqs_update', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('faqs_list');
+    $breadcrumbs->push('Edit Faqs', route(Auth::getDefaultDriver() . '.faqs.edit', $id));
 });
