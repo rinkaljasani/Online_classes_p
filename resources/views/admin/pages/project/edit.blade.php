@@ -36,7 +36,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Update {{ $custom_title }}</button>
-                <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
         <!--end::Form-->

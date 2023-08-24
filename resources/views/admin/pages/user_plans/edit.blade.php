@@ -98,7 +98,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2 text-uppercase"> Update {{ $custom_title }}</button>
-                <a href="{{ route('admin.plans.index') }}" class="btn btn-secondary text-uppercase">Cancel</a>
+                <a href="{{ route('admin.user_plans.index') }}" class="btn btn-secondary text-uppercase">Cancel</a>
             </div>
         </form>
         <!--end::Form-->
