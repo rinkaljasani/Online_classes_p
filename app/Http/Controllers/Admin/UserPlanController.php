@@ -186,15 +186,16 @@ class UserPlanController extends Controller
             $content['message'] = "Subscribed Users deleted successfully.";
             $content['count'] = UserPlan::all()->count();
             return response()->json($content);
-        } else
-            $user_plan = UserPlan::where('custom_id', $id)->firstOrFail();
-        $user_plan->delete();
-        if (request()->ajax()) {
-            $content = array('status' => 200, 'message' => "Subscribed user plan deleted successfully.", 'count' => UserPlan::all()->count());
-            return response()->json($content);
         } else {
-            flash('Subscribed user plan deleted successfully.')->success();
-            return redirect()->route('admin.user_plans.index');
+            $user_plan = UserPlan::where('custom_id', $id)->firstOrFail();
+            $user_plan->delete();
+            if (request()->ajax()) {
+                $content = array('status' => 200, 'message' => "Subscribed user plan deleted successfully.", 'count' => UserPlan::all()->count());
+                return response()->json($content);
+            } else {
+                flash('Subscribed user plan deleted successfully.')->success();
+                return redirect()->route('admin.user_plans.index');
+            }
         }
     }
 
@@ -212,9 +213,9 @@ class UserPlanController extends Controller
                     $query->where('first_name', 'like', "%{$search}%")
                         ->orWhere('last_name', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%");
-                })->orWhareHas('plan', function ($query) use ($search) {
+                })->orWhereHas('plan', function ($query) use ($search) {
                     $query->where('name', 'like', "%{$search}%");
-                })->orWhareHas('project', function ($query) use ($search) {
+                })->orWhereHas('project', function ($query) use ($search) {
                     $query->where('name', 'like', "%{$search}%");
                 });
             });

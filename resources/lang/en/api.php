@@ -42,5 +42,6 @@ return [
         'registered_fail' => 'Sorry,You are not registered with us.',
         'login' =>  'Login Successfully',
         'logout'    =>  'Logout successfully.',
+        'expired_plan' => 'Your Plan Has been Expired',
 
 ];

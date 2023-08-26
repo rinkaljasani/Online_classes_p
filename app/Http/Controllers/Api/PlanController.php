@@ -15,38 +15,43 @@ use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
-    public function getUserActivePlan(Request $request){
+    public function getUserActivePlan(Request $request)
+    {
 
         $device = UserDevice::whereCustomId($request->device_id)->first();
 
-        $userplan = UserPlan::whereUserId(auth()->user()->id)->whereUserDeviceId($device->id)->orderBy('created_at','desc')->first();
-        if ($userplan) {
+        $userplan = UserPlan::whereUserId(auth()->user()->id)->whereUserDeviceId($device->id)->orderBy('created_at', 'desc')->first();
+        if (!Carbon::now()->gt($userplan->expiry_at)) {
+            if ($userplan) {
+                return (new UserPlanResource($userplan))->additional([
 
-            return (new UserPlanResource($userplan))->additional([
-
-                'meta' => [
-					'status' => '1',
-                    'message' =>    trans('api.list', ['entity' => __('Project')]),
-                    'url'       =>  url()->current(),
-                ]
-            ]);
-
+                    'meta' => [
+                        'status' => '1',
+                        'message' =>    trans('api.list', ['entity' => __('Project')]),
+                        'url'       =>  url()->current(),
+                    ]
+                ]);
+            } else {
+                $this->response['meta']['message']  = trans('api.not_found', ['entity' => 'User active plan']);
+                $this->response['meta']['status']  = '0';
+            }
         } else {
-			$this->response['meta']['message']  = trans('api.not_found',['entity' => 'User active plan']);
-			$this->response['meta']['status']  = '0';
-		}
+            $this->response['meta']['message']  = trans('api.expired_plan');
+            $this->response['meta']['status']  = '1';
+        }
         return $this->returnResponse(200);
     }
 
-    public function addUserPlan(Request $request){
+    public function addUserPlan(Request $request)
+    {
         $user_id = Auth::id();
 
         $extra_plan_months = 0;
         $plan = Plan::whereCustomId($request->plan_id)->with('project')->first();
         $device = UserDevice::whereCustomId($request->device_id)->first();
-        $isPlanExists = UserPlan::where('user_device_id',$device->id)->where('plan_id',$plan->id)->first();
+        $isPlanExists = UserPlan::where('user_device_id', $device->id)->where('plan_id', $plan->id)->first();
 
-        if($isPlanExists && Carbon::now()->lt($isPlanExists->expiry_at)){
+        if ($isPlanExists && Carbon::now()->lt($isPlanExists->expiry_at)) {
             $extra_plan_months = Carbon::now()->diffInMonths($isPlanExists->expiry_at);
         }
 
@@ -54,7 +59,7 @@ class PlanController extends Controller
         $userplan = UserPlan::updateOrCreate([
             'user_device_id' => $device->id,
             'plan_id' => $plan->id,
-        ],[
+        ], [
             'user_id' => $user_id,
             'custom_id' => getUniqueString('user_plans'),
             'project_id' => $plan->project->id,
@@ -69,7 +74,9 @@ class PlanController extends Controller
                     'url'       =>  url()->current(),
                 ]
             ]);
-        } else { $this->response['meta']['message']  = trans('api.registered_fail'); }
+        } else {
+            $this->response['meta']['message']  = trans('api.registered_fail');
+        }
         return $userplan;
     }
 }

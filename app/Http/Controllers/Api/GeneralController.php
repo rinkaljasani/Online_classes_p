@@ -31,7 +31,7 @@ class GeneralController extends Controller
 
 
         $project_id = Project::whereCustomId($request->project_id)->first()->id;
-        $plans = Plan::where('project_id',$project_id)->get();
+        $plans = Plan::where('project_id',$project_id)->orderBy('prorities','asc')->get();
         if ($plans) {
             return PlanResource::collection($plans)->additional([
                 'meta' => [

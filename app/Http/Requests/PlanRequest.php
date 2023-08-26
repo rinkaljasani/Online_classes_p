@@ -34,6 +34,7 @@ class PlanRequest extends FormRequest
             'special_offer_months'  => 'required_unless:action,'.$unless.'|numeric',
             'is_active'             => 'required_unless:action,'.$unless,
             'project_id'            => 'required_unless:action,'.$unless,
+            'prorities'            => 'required_unless:action,'.$unless.'|numeric',
         ];
     }
 }

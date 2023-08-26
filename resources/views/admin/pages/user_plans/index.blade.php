@@ -69,11 +69,12 @@
             ajax: {
                 url: "{{ route('admin.user_plans.listing') }}",
                 data: {
-                    columnsDef: ['checkbox','user_id','plan_id','project_name', 'device_id','device_type','purchase_at','expiry_at','active','action'],
+                    columnsDef: ['checkbox','id','user_id','plan_id','project_name', 'device_id','device_type','purchase_at','expiry_at','active','action'],
                 },
             },
             columns: [
                 { data: 'checkbox' },
+                {data : 'id', visible:false},
                 { data: 'user_id' },
                 { data: 'plan_id' },
                 { data: 'project_id' },
@@ -87,14 +88,15 @@
             columnDefs: [
                 // Specify columns titles here...
                 { targets: 0, title: "<center><input type='checkbox' class='all_select'></center>", orderable: false },
-                { targets: 1, title: 'User Name', orderable: false },
-                { targets: 2, title: 'Plan Name', orderable: false },
-                { targets: 3, title: 'Project Name', orderable: false },
-                { targets: 4, title: 'Device Id', orderable: false },
-                { targets: 5, title: 'Device Name', orderable: false },
-                { targets: 6, title: 'Plan Starts From', orderable: false },
-                { targets: 7, title: 'Plan Expiry', orderable: false },
-                { targets: 8, title: 'Active', orderable: true },
+                { targets: 1, title: 'id', orderable: false },
+                { targets: 2, title: 'User Name', orderable: false },
+                { targets: 3, title: 'Plan Name', orderable: false },
+                { targets: 4, title: 'Project Name', orderable: false },
+                { targets: 5, title: 'Device Id', orderable: false },
+                { targets: 6, title: 'Device Name', orderable: false },
+                { targets: 7, title: 'Plan Starts From', orderable: false },
+                { targets: 8, title: 'Plan Expiry', orderable: false },
+                { targets: 9, title: 'Active', orderable: false },
 
                 // Action buttons
                 { targets: -1, title: 'Action', orderable: false },

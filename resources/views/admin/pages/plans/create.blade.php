@@ -34,7 +34,7 @@
                 {{-- Description --}}
                 <div class="form-group">
                     <label for="description">{!!$mend_sign!!}Plan description:</label>
-                    <textarea type="text" class="form-control" placeholder="Enter plan description" name="description" id="description" required></textarea>
+                    <textarea type="text" class="form-control" placeholder="Enter plan description" name="description" id="description"></textarea>
                     @if ($errors->has('description'))
                         <span class="help-block">
                             <strong class="form-text">{{ $errors->first('description') }}</strong>
@@ -106,6 +106,16 @@
                         </span>
                     @endif
                 </div>
+                {{-- Plan Priority --}}
+                <div class="form-group">
+                    <label for="prorities">Add Plan Priority{!!$mend_sign!!}</label>
+                    <input type="text" class="form-control @error('prorities') is-invalid @enderror" id="prorities" name="prorities" value="{{ old('prorities') }}" placeholder="Enter Plan Priority" />
+                    @if ($errors->has('prorities'))
+                        <span class="help-block">
+                            <strong class="form-text">{{ $errors->first('prorities') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
             </div>
             <div class="card-footer">
@@ -152,10 +162,14 @@ $(document).ready(function () {
             },
             project_id: {
                 required: true,
+            },
+            prorities:{
+                required: true,
+                not_empty: true,
+                digits: true,
+                min:1
             }
-            // image:{
-            //     extension: "jpg|jpeg|png",
-            // },
+
         },
         messages: {
             name: {
@@ -188,6 +202,12 @@ $(document).ready(function () {
             },
             project_id: {
                 required: "@lang('validation.required',['attribute'=>'Project'])",
+            },
+            prorities:{
+                required: "@lang('validation.required',['attribute'=>'Priority'])",
+                not_empty: "@lang('validation.not_empty',['attribute'=>'Priority'])",
+                digits: "@lang('validation.numeric',['attribute'=>'Priority'])",
+                min: "@lang('validation.min.numeric',['attribute'=>'Priority','min' => 1])",
             }
         },
         errorClass: 'invalid-feedback',
