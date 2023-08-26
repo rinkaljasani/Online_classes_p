@@ -86,8 +86,8 @@
                 // Specify columns titles here...
                 { targets: 0, title: "<center><input type='checkbox' class='all_select'></center>", orderable: false },
                 { targets: 1, title: 'Question', orderable: true },
-                { targets: 2, title: 'Project', orderable: true },
-                { targets: 3, title: 'Active', orderable: true },
+                { targets: 2, title: 'Project', orderable: false },
+                { targets: 3, title: 'Active', orderable: false },
 
                 // Action buttons
                 { targets: -1, title: 'Action',
