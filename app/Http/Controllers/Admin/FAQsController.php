@@ -153,7 +153,10 @@ class FAQsController extends Controller
         $faqs = Faqs::orderBy($sort_column, $sort_order);
         if ($search != '') {
             $faqs->where(function ($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%");
+                $query->where('question', 'like', "%{$search}%");
+                $query->orWhereHas('project',function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                });
             });
         }
 

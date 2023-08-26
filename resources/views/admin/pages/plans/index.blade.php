@@ -70,7 +70,7 @@
             ajax: {
                 url: "{{ route('admin.plans.listing') }}",
                 data: {
-                    columnsDef: ['checkbox','name','project' ,'months', 'special_offer_months','price', 'active', 'action'],
+                    columnsDef: ['checkbox','name','project' ,'months', 'special_offer_months','price','prorities', 'active', 'action'],
                     project_id: project_id,
                 },
             },
@@ -81,6 +81,7 @@
                 { data: 'months' },
                 { data: 'special_offer_months' },
                 { data: 'price' },
+                { data: 'prorities' },
                 { data: 'active' },
                 { data: 'action', responsivePriority: -1 },
             ],
@@ -88,15 +89,15 @@
                 // Specify columns titles here...
                 { targets: 0, title: "<center><input type='checkbox' class='all_select'></center>", orderable: false },
                 { targets: 1, title: 'Name', orderable: true },
-                { targets: 2, title: 'Project', orderable: true },
+                { targets: 2, title: 'Project', orderable: false },
                 { targets: 3, title: 'Month', orderable: true },
                 { targets: 4, title: 'Special Offer Month', orderable: true },
                 { targets: 5, title: 'Price', orderable: true },
-                { targets: 5, title: 'Active', orderable: true },
+                { targets: 6, title: 'Priority', orderable: true },
+                { targets: 7, title: 'Active', orderable: false },
 
                 // Action buttons
-                { targets: -1, title: 'Action',
-                orderable: false },
+                { targets: -1, title: 'Action', orderable: false },
             ],
             order: [
                 [1, 'asc']

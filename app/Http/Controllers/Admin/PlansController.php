@@ -195,6 +195,7 @@ class PlansController extends Controller
                 'months' => $plan->months ?? "",
                 'price' => $plan->price ?? "",
                 'special_offer_months' => $plan->special_offer_months ?? "",
+                'prorities' => $plan->prorities ?? null,
                 'active' => view('admin.layouts.includes.switch', compact('params'))->render(),
                 'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Plan', 'id' => $plan->custom_id], $plan)->render(),
                 'checkbox' => view('admin.layouts.includes.checkbox')->with('id', $plan->custom_id)->render(),
