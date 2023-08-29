@@ -23,31 +23,27 @@ class PlanController extends Controller
         $userplan = UserPlan::whereUserId(auth()->user()->id)->whereUserDeviceId($device->id)->orderBy('created_at', 'desc')->first();
         if (!Carbon::now()->gt($userplan->expiry_at)) {
             if ($userplan) {
-                $this->response['meta']['message']  = trans('api.list', ['entity' => __('Project')]);
-                $this->response['meta']['status']  = '1';
-                // return (new UserPlanResource($userplan))->additional([
-                //     'meta' => [
-                //         'status' => '1',
-                //         'message' =>    trans('api.list', ['entity' => __('Project')]),
-                //         'url'       =>  url()->current(),
-                //     ]
-                // ]);
+                return (new UserPlanResource($userplan))->additional([
+
+                    'meta' => [
+                        'status' => '1',
+                        'message' =>    trans('api.list', ['entity' => __('Project')]),
+                        'url'       =>  url()->current(),
+                    ]
+                ]);
             } else {
                 $this->response['meta']['message']  = trans('api.not_found', ['entity' => 'User active plan']);
                 $this->response['meta']['status']  = '0';
             }
         } else {
-            $this->response['meta']['message']  = trans('api.expired_plan');
-            $this->response['meta']['status']  = '2';
-        }
-        return (new UserPlanResource($userplan))->additional([
+            return (new UserPlanResource($userplan))->additional([
 
-            'meta' => [
-                'status' => '1',
-                'message' =>    trans('api.list', ['entity' => __('Project')]),
-                'url'       =>  url()->current(),
-            ]
-        ]);
+                'meta' => [
+                    'status' => '2',
+                    'message' =>    trans('api.expired_plan'),
+                ]
+            ]);
+        }
         return $this->returnResponse(200);
     }
 

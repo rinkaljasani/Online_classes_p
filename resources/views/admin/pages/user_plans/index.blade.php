@@ -35,16 +35,21 @@
             </div>
         </div>
         <div class="card-body">
-            {{-- <div class="row mb-10 ">
-                <div class="col-lg-4">
-                    <label class="">Project</label>
-                    <select class="form-control select2" id="project_id" name="project_id">
-                        @foreach($projects as $project)
-                            <option value="{{ $project->custom_id}}">{{ $project->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div> --}}
+            {{-- Date Filter --}}
+            <div class="form-group row">
+				<label class="col-form-label col-lg-2 col-sm-12">Date Filter:</label>
+				<div class="col-lg-4 col-md-9 col-sm-12">
+					<div class='input-group' id='date_filter'>
+						<input type='text' class="form-control" id="date_filter" readonly name="date_filter"  placeholder="Select date range"/>
+                        <input type="hidden" name="start_date" id="start_date">
+                        <input type="hidden" name="end_date" id="end_date">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
             {{--  Datatable Start  --}}
             <table class="table table-bordered table-hover table-checkable" id="user_plans_table" style="margin-top: 13px !important"></table>
             {{--  Datatable End  --}}
@@ -57,6 +62,18 @@
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script>
     $(document).ready(function () {
+
+        $('#date_filter').daterangepicker({
+            buttonClasses: ' btn',
+			applyClass: 'btn-primary',
+			cancelClass: 'btn-secondary'
+        },
+        function(start,end,label){
+            $('#date_filter .form-control').val( start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'));
+            $('#start_date').val(start.format('YYYY-MM-DD'));
+            $('#end_date').val(end.format('YYYY-MM-DD'));
+            oTable.draw();
+        });
         dataTableValue();
         // datatable
         function dataTableValue()
@@ -70,6 +87,12 @@
                 url: "{{ route('admin.user_plans.listing') }}",
                 data: {
                     columnsDef: ['checkbox','id','user_id','plan_id','project_name', 'device_id','device_type','purchase_at','expiry_at','active','action'],
+                    start_date : function(){
+                        return $('#start_date').val();
+                    },
+                    end_date : function(){
+                        return $('#end_date').val();
+                    },
                 },
             },
             columns: [
@@ -121,5 +144,9 @@
      $('#project_id').select2({
         placeholder: "Select a currancy"
     });
+    // $('#date_range').on('change.datepicker',function(){
+    //     console.log('hello');
+    //     console.log($(this).val());
+    // });
 </script>
 @endpush

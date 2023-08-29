@@ -38,6 +38,8 @@ class Controller extends BaseController
             'sort_column' => (isset($request['order'][0]['column']) && isset($request['columns'][$request['order'][0]['column']]['data'])) ? $request['columns'][$request['order'][0]['column']]['data'] : 'created_at',
             'sort_order' => isset($request['order'][0]['dir']) ? $request['order'][0]['dir'] : 'DESC',
             'search' => isset($request['search']['value']) ? $request['search']['value'] : '',
+            'start_date' => isset($request['start_date']) ? $request['start_date'] : '',
+            'end_date' => isset($request['end_date']) ? $request['end_date'] : '',
         );
         return $filters;
     }

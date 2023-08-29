@@ -204,6 +204,7 @@ class UserPlanController extends Controller
     public function listing(Request $request)
     {
         extract($this->DTFilters($request->all()));
+
         $records = [];
         $user_plans = UserPlan::orderBy($sort_column, $sort_order);
 
@@ -219,6 +220,9 @@ class UserPlanController extends Controller
                     $query->where('name', 'like', "%{$search}%");
                 });
             });
+        }
+        if((isset($start_date) && $start_date !== '') && isset($end_date) && $end_date !== '' ){
+            $user_plans->whereBetween('purchase_at',[$start_date,$end_date]);
         }
         $count = $user_plans->count();
 
