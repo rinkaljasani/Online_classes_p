@@ -15,6 +15,6 @@ class Project extends Model
         return $this->hasMany(User::class,'project_id','id');
     }
     public function plans(){
-        return $this->hasMany(Plan::class,'project_id','id');
+        return $this->hasMany(Plan::class,'project_id','id')->orderBy('prorities');
     }
 }

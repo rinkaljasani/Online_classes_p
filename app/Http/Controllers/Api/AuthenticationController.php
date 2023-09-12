@@ -33,6 +33,7 @@ class AuthenticationController extends Controller
                 'first_name' => $request['first_name'],
                 'last_name' => $request['last_name'],
                 'contact_no' => $request['contact_no'],
+
             ]);
             UserDevice::where('user_id',$user->id)->update(['is_active'=>'n']);
 
@@ -47,6 +48,7 @@ class AuthenticationController extends Controller
                     'custom_id' =>getUniqueString('user_devices'),
                     'user_id' => $user->id,
                     'device_id' => $request['device_id'],
+                    'device_type' => $request['device_type'],
                     'is_active' => 'y'
                 ]);
             }
