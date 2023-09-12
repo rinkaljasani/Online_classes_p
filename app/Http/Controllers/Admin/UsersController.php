@@ -93,8 +93,9 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        try{
-            DB::beginTransaction();
+
+        // try{
+            // DB::beginTransaction();
             if(!empty($request->action) && $request->action == 'change_status') {
                 $content = ['status'=>204, 'message'=>"something went wrong"];
                 if($user) {
@@ -123,9 +124,9 @@ class UsersController extends Controller
                     }
                     $path = $request->profile_photo->store('users/profile_photo');
                 }
-                $user->project_id = Project::whereCustomId($request->project_id)->first(['id'])->id;
+                // $user->project_id = Project::whereId($user->project->id)->first()->id;
                 $user->fill($request->all());
-                $user->profile_photo = $path;
+                // $user->profile_photo = $path;
                 if( $user->save() ) {
                     DB::commit();
                     flash('User details updated successfully!')->success();
@@ -134,12 +135,12 @@ class UsersController extends Controller
                 }
                 return redirect(route('admin.users.index'));
             }
-        }catch(QueryException $e){
-            DB::rollback();
-            return redirect()->back()->flash('error',$e->getMessage());
-        }catch(Exception $e){
-            return redirect()->back()->with('error',$e->getMessage());
-        }
+        // }catch(QueryException $e){
+        //     DB::rollback();
+        //     return redirect()->back()->flash('error',$e->getMessage());
+        // }catch(Exception $e){
+        //     return redirect()->back()->with('error',$e->getMessage());
+        // }
     }
 
     /**

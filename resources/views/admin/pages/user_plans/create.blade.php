@@ -135,7 +135,7 @@ $(document).ready(function () {
                 if( response.users.length > 0){
 
                     response.users.map(function(user){
-                        usersOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`;
+                        usersOptions += `<option value="${user.id}">${user.first_name} ${user.last_name} (${user.email})</option>`;
                     });
                     // $('#user_id').select2('refresh');
                 }

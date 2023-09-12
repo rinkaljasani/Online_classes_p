@@ -37,9 +37,8 @@ class AuthenticationController extends Controller
             ]);
             UserDevice::where('user_id',$user->id)->update(['is_active'=>'n']);
 
-            $user_device =UserDevice::where(['user_id' => $user->id,'device_id' => $request->device_id])->first();
+            $user_device =UserDevice::where(['user_id' => $user->id,'device_id' => $request->device_id,'device_type'=>$request->device_type])->first();
             if($user_device){
-
                 $user_device->is_active = 'y';
                 $user_device->save();
             }else{
